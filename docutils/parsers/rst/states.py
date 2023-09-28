@@ -2294,7 +2294,8 @@ class Body(RSTState):
                 return [nodes.comment()], True # "A tiny but practical wart."
             if first_comment_line.startswith('end of inclusion from "'):
                 # cf. parsers.rst.directives.misc.Include
-                self.document.include_log.pop()
+                if len(self.document.include_log):
+                    self.document.include_log.pop()
                 return [], True
         indented, indent, offset, blank_finish = \
               self.state_machine.get_first_known_indented(match.end())
